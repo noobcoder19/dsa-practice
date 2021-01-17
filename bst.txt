@@ -1,0 +1,112 @@
+1.  Find the cieling of a binary search tree
+	int findceil(Node *root,int k)
+{
+	int res;
+	if(root==NULL)
+		return INT_MAX;
+
+	else if(k>root->data)
+	{
+		root=root->right;
+	}
+	else
+	{
+		res=root->data;
+		root=root->left;
+	}
+
+	return res;
+}
+
+2. Check if the given binary tree is a BST:-
+
+
+void checkbstUtil(Node *root,Node *&prev)
+{
+	if(root==NULL)
+		return true;
+
+	if(root)
+	{
+		if(!checkbstUtil(root->left,prev)
+			return false;
+
+		if(prev!=NULL && root->data<=prev->data)
+			return false;
+
+			prev=root;
+
+		return (checkbstUtil(root->right,prev);
+	}
+	return true;
+}
+void checkbst(Node *root)
+{
+	Node *prev=NULL;
+	checkbstUtil(root,prev);
+}
+
+4. Find the kth smallest element in abst:-
+
+Node *findkthsmallest(Node *root,int &count,int k)
+{
+	if(root==NULL)
+		return NULL;
+
+	Node *left=findkthsmallest(root->left,count,k);
+
+	if(left!=NULL)
+		return left;
+
+	count++;
+	if(count==k)
+		return root;
+
+	return (findkthsmallest(root->right,count,k);
+}
+
+
+5. Find if a pair with a given sum exists in a binary tree:-
+bool findsum(Node *root,int sum)
+{
+	unordered_set<int> umap;
+
+	findsum(root,sum,umap);
+}
+bool find(Node *root,int sum,unordered_set<int> &uset)
+{
+
+	if(root==NULL)
+		return false;
+
+
+	if(find(root->left,sum,uset)!=NULL)
+		return true;
+
+	if(uset.find(sum-root->data)!=uset.end())
+		return true;
+
+	else
+		uset.insert(root->data);
+
+
+	return find(root->right,sum,uset);
+}
+
+3.  Convert a binary tree to a linked list:-
+
+void convertoll(struct Node *root,Node *head)
+{
+	static Node *prev=NULL;
+	if(!root) return;
+	convertoll(root->left,head);
+	if(!*head)
+	*head=root;
+
+	else{
+		root->left=prev;
+		prev->right=root;
+		}
+	prev=root;
+	covertoll(root->right,head);
+}

@@ -1,0 +1,169 @@
+
+1. inorder iterative:-
+
+void inorder(struct Node *root)
+{
+	stack<Node *> st;
+	stuct Node *current=root;
+	while(!st.empty() && current)
+	{
+		
+		while(current)
+		{
+		st.push(current);
+		current=current->left;
+		}
+	
+	current=st.top();
+	st.pop();
+	cout<<curr->data<<" ";
+	curr=curr->right;
+	}
+}
+
+2. preorder iterative:-
+
+
+void preorder(struct Node *root)
+{
+	stack <Node*> st;
+	st.push(root);
+	while(!st.empty())
+	{
+		struct Node *temp=st.top();
+		st.pop();
+		cout<<temp->data<<" ";
+		if(temp->right)
+			st.push(temp->right);
+		if(temp->left)
+			st.push(temp->left);
+	}
+}
+
+3. postorder iterative:-
+
+void postOrderIterative(Node* root) 
+{ 
+    if (root == NULL) 
+        return; 
+  
+    // Create 
+    stack<Node *> s1, s2; 
+  
+    // push root to first stack 
+    s1.push(root); 
+    Node* node; 
+  
+    // Run while first stack is not empty 
+    while (!s1.empty()) { 
+        // Pop an item from s1 and push it to s2 
+        node = s1.top(); 
+        s1.pop(); 
+        s2.push(node); 
+  
+        // Push left and right children 
+        // of removed item to s1 
+        if (node->left) 
+            s1.push(node->left); 
+        if (node->right) 
+            s1.push(node->right); 
+    } 
+  
+    // Print all elements of second stack 
+    while (!s2.empty()) { 
+        node = s2.top(); 
+        s2.pop(); 
+        cout << node->data << " "; 
+    } 
+} 
+
+4. left view of a binary tree:-
+
+void leftview(Node *root)
+{
+	queue<Node *> q;
+	q.push(root);
+	while(!q.empty())
+	{
+		int cnt=q.size();
+		for(int i=0;i<cnt;i++)
+		{
+			Node *temp=q.front();
+			if(i==0)
+			{
+				cout<<temp->data;
+				cout<<"\n";
+			}
+			q.pop();
+			if(temp->left)
+				q.push_back(temp->left);
+			if(temp->right)
+				q.pudh_back(temp->right);
+			}	
+	}
+}
+
+5. top view of binary tree
+
+void topview(struct Node *root)
+{
+	if(root==NULL)
+		return root;
+
+	queue<Node *> q;
+	map<int,int> m;
+	int hd=0;
+	root->hd=hd;
+	q.push(root);
+	while(!q.empty())
+	{
+		hd=root->hd;
+		if(m.count(hd)==0)
+			m[hd]=root->data;
+		if(root->left)
+		{
+			root->left->hd=hd-1;
+			q.push(root->left);
+		}
+		else if(root->right)
+		{
+			root->right->hd=hd+1;
+			q.push(root->right);
+		}
+		q.pop();
+		root=q.front();
+	}
+}
+
+
+6. bottom view of binary tree:-
+
+void topview(struct Node *root)
+{
+	if(root==NULL)
+		return root;
+
+	queue<Node *> q;
+	map<int,int> m;
+	int hd=0;
+	root->hd=hd;
+	q.push(root);
+	while(!q.empty())
+	{
+		Node *temp=q.front();
+		q.pop();
+		hd=root->hd;
+		m[hd]=temp->data;
+		if(root->left)
+		{
+			root->left->hd=hd-1;
+			q.push(root->left);
+		}
+		else if(root->right)
+		{
+			root->right->hd=hd+1;
+			q.push(root->right);
+		}
+	}
+}
+						

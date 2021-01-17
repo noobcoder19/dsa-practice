@@ -1,0 +1,362 @@
+1. Clone a graph:-
+
+GraphNode *clonegraph(GraphNode *src)
+{
+	map<GraphNode*,GraphNode*> umap;
+	queue<GraphNode *> q;
+	q.push(src);
+	GraphNode *newnode;
+	newnode= new GraphNode();
+	newnode->val=src->val;
+	umap[src]=newnode;
+	while(!q.empty())
+	{
+		int u=q.front();
+		q.pop();
+		vector<GraphNode *> v=u->neighbours;
+ 		int n=v.size();
+		for(int i=0;i<n;i++)
+		{
+			if(umap[v[i]]==NULL)
+			{
+				newnode=new GraphNode();
+				newnode->val=v[i]->val;
+				umap[v[i]]=newnode;
+				q.push(v[i]);
+			}
+			else
+			umap[u]->neighbours.push_back(umap[v[i]]);
+		}
+		return umap[src];
+}
+		
+	
+
+2.DFS Traversal of a graph:_
+void dfs(vector<int> adj[],vector<bool> &visited,int s,int N)
+{
+	cout<<s<<" ";
+	visited[s]=true;
+	for(int x:adj[s])
+	{
+		if(!visited[x])
+		{
+			//visited[x]=true;
+			dfs(adj,visited,x,N);
+		}
+	}
+}
+
+
+
+
+3. BFS Traversal of a graph:-
+
+void bfs(vector<int> adj[],vector<bool> &visited,int s,int N)
+{
+	queue<int> q;
+	q.push(s);
+	visited[s]=true;
+	while(!q.empty())
+	{
+		int u=q.front();
+		q.pop();
+		cout<<u<<" ";
+		for(int x:adj[u])
+		{
+			if(!visited[x])
+			{
+				visited[x]=true;
+				q.push(x);
+			}
+		}
+}
+4. Detect a cycle in an undirected graph:-
+
+int dfs(vector<int> adj[],int x,int parent)
+{
+	visited[x]=true;
+	for(int u:adj[x])
+	{
+		if(!visited[u] && dfs(adj,u,x)==true)
+			return true;
+
+		if(u!=parent)
+			return true;
+	}
+	return false;
+}
+int detectcycle(vector<int> adj[],int n)
+
+	bool visited[n]={false};
+	for(int i=0;i<n;i++)
+	if(!visited[i])
+	if(dfs(adj,visited,i,-1)==true)
+		return true;
+}
+
+Detect a cycle in a directed graph:-
+
+int dfs(vector<int> adj[],int x,int rec,int visited[])
+{
+	visited[x]=true;
+	rec[x]=true;
+	for(int u:adj[x])
+	{
+		if(!visited[u] && dfs(adj,u,rec,visited)==true)
+			return true;
+
+		else if(rec[u])
+			return true;
+}
+		rec[x]=false;
+	}
+	return false;
+}
+int detectcycle(vector<int> adj[],int n)
+
+	bool visited[n]={false};
+	bool recstck[n]={false};
+	for(int i=0;i<n;i++)
+	if(!visited[i])
+	if(dfs(adj,visited,i,recstack)==true)
+		return true;
+}
+
+5. Topological Sort:-
+void topologicalsort(vector<int> adj[],int V)
+{
+	vector<int> in_degree(V, 0); 
+    for (int u = 0; u < V; u++) { 
+        list<int>::iterator itr; 
+        for (itr = adj[u].begin(); 
+             itr != adj[u].end(); itr++) 
+            in_degree[*itr]++; 
+    } 
+  
+    queue<int> q; 
+    for (int i = 0; i < V; i++) 
+        if (in_degree[i] == 0) 
+            q.push(i); 
+  
+ 
+    int cnt = 0; 
+    vector<int> top_order; 
+  
+    while (!q.empty()) { 
+        int u = q.front(); 
+        q.pop(); 
+        top_order.push_back(u); 
+  
+        list<int>::iterator itr; 
+        for (itr = adj[u].begin(); 
+             itr != adj[u].end(); itr++) 
+  
+            if (--in_degree[*itr] == 0) 
+                q.push(*itr); 
+  
+        cnt++; 
+    } 
+  
+    if (cnt != V) { 
+        cout << "There exists a cycle in the graph\n"; 
+        return; 
+    } 
+  
+    for (int i = 0; i < top_order.size(); i++) 
+        cout << top_order[i] << " "; 
+    cout << endl; 
+} 
+
+
+
+6. No 0f islands in a graph:-. 
+int vx[8]={1,1,0,-1,-1,-1,0,1};
+int vy[8]={0,1,1,1,-0,-1,-1,-1}
+bool issafe(int x,int y,int N,int M)
+{
+	if(x<0 || x>M || y<0 || y>N)	return 0;
+		return 1;
+}
+int dfs(vector<int> adj[],bool<int> &vis,int i,int j,int N,int M)
+{
+	vis[i][j]=true;
+	for(int i=0;i<8;i++)
+	{
+		int u=i+vx[i];
+		int v=j+vy[i];
+		if(issafe(u,v,N,M) && !vis[u][v] && adj[u][v])
+			dfs(adj,vis,u,v,N,M);
+	}
+
+}
+int findislands(vector<int> adj[],int N ,int M)
+{
+	int count=0;
+	vector<vector<int>> vis(N,vector<int>(M,0));
+	for(int i=0;i<N;i++)
+		for(int j=0;j<M;j++)
+		if(!vis[i][j] && adj[i][j])
+		{	count++;dfs(adj,vis,i,j,N,M);
+		}
+}
+
+No of islands in a graph:-
+void dfs(vector<int> adj[],vector<bool> &visited,int s)
+{
+	//cout<<s<<" ";
+	visited[s]=true;
+	for(int x:adj[s])
+	{
+		if(!visited[x])
+		{
+			//visited[x]=true;
+			dfs(adj,visited,x);
+		}
+	}
+}
+int findislands(vector<int> adj[],int V)
+{
+	bool visited[V];
+	int count=0;
+
+	for(int i=0;i<V;i++)
+	visited[i]=false;
+
+	for(int i=0;i<V;i++)
+	if(!visited[i])
+		{
+		DFS(adj,visited,i);
+		count++;
+		}
+	return count;
+}
+7. Bipartite check:-
+bool isbipartite(int G[][MAX],int V,int src)
+{
+    int colorArr[V]; 
+    for (int i = 0; i < V; ++i) 
+        colorArr[i] = -1; 
+  
+   
+    colorArr[src] = 1; 
+  
+   
+    queue <int> q; 
+    q.push(src); 
+  
+    while (!q.empty()) 
+    { 
+        
+        int u = q.front(); 
+        q.pop(); 
+  
+      
+        if (G[u][u] == 1) 
+        return false;  
+  
+      
+        for (int v = 0; v < V; ++v) 
+        { 
+            // An edge from u to v exists and  
+            // destination v is not colored 
+            if (G[u][v] && colorArr[v] == -1) 
+            { 
+                // Assign alternate color to this adjacent v of u 
+                colorArr[v] = 1 - colorArr[u]; 
+                q.push(v); 
+            } 
+  
+          
+            else if (G[u][v] && colorArr[v] == colorArr[u]) 
+                return false; 
+        } 
+    } 
+  
+
+    return true; 
+}
+
+bool isBipartite(int G[][MAX],int V)
+{
+   
+     return isbipartite(G,V,0);
+        
+    
+}
+
+9.Shortest path in an unweighted graph:-
+
+int bfs(vector<int> adj[],int s,int v)
+{
+	int distance[v]=INT_MAX;
+	int visited[v]=false;
+	queue<int> q;
+	q.push(s);
+	distance[s]=0;
+	visited[s]=true;
+	while(!q.empty())
+	{
+		int u=q.front();
+		q.pop();
+		for(int x:adj[u])
+		{
+			if(visited[x]==false)
+			{
+				visited[x]=true;
+				dist[x]=dist[u]+1;
+				q.push(x);
+			}
+		}
+	}
+}
+
+10. Shortest path in directed graph:-
+
+int mindistance(vector<int> adj[],int s)
+{
+	int dist[v]={INT_MAX);
+	dist[s]=0;
+	vector<int> indegree(V,0);
+	for(int u=0;u<V;u++)
+	list<int>:: iterator it;
+	for(it=adj[u].begin();it!=adj[u].end();it++)
+		indegree[*it]++;
+
+	queue<int> q;
+	for(int u=0;u<V;u++)
+		if(indegree[u]==0)
+			q.push(u);
+  
+ 
+    int cnt = 0; 
+    vector<int> top_order; 
+  
+    while (!q.empty()) { 
+        int u = q.front(); 
+        q.pop(); 
+        top_order.push_back(u); 
+  
+        list<int>::iterator itr; 
+        for (itr = adj[u].begin(); 
+             itr != adj[u].end(); itr++) 
+  
+            if (--in_degree[*itr] == 0) 
+                q.push(*itr); 
+  
+        cnt++; 
+    } 
+  
+    for(int u=0;u<V;u++)
+	{
+	for(int v:adj[u])
+	{
+		if(dist[v]>dist[u]+wt(u,v))
+			dist[v]=dist[u]+w(u,v);
+	}
+
+  
+} 
+		
+
+	

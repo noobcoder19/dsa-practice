@@ -1,0 +1,109 @@
+1. check if two trees are identical:_
+
+bool isidentical(Node *root1,Node *root2)
+{
+	if(!root1 && !root2)
+		return true;
+
+	if(root1 && root2)
+	{
+		return
+		(  (root1->data==root2->data) &&
+		isidentical(root1->left,root2->left) &&
+		isidentical(root1->right,root2->right)
+		);
+	}
+	return false;
+}
+
+2. maximum path sum in a binary tree:-
+
+int maxpathsumutil(Node *root,int &res)
+{
+	if(root==NULL)
+		return 0;
+
+	int l=maxpathsumutil(root->left,res);
+	int r=maxpathsumutil(root->right,res);
+
+	int max_single=max(max(l,r)+root->data,root->data);
+
+	int maxpath=max(max_single,l+r+root->data);
+
+	res=max(res,maxpath);
+
+	return max_single;
+}
+
+int maxpathsum(Node *root)
+{
+	int res=INT_MIN;
+	maxpathsumutil(root,res);
+	return res;
+}
+
+2. 
+
+Node *buildtree(char pre[],char in[],int inStart,int inEnd)
+{
+	
+	static preIndex=0;
+	if(inStart>inEnd)
+		return NULL;
+
+
+	Node *tnode=new Node(pre[preindex++]);
+
+	if(inStart==inEnd)
+		return tnode;
+
+	int inIndex=search(in,inStart,inEnd,tnode->data);
+
+	tnode->left=buildtree(pre,in,inStart,inIndex-1);
+	tnode->right=buildtree(pre,in,inIndex+1,inEnd);
+
+	return tnode;
+}
+
+int search(char in[],int inStart,inEnd,int x)
+{
+	for(int i=inStart;i<=inEnd;i++)
+	if(in[i]==x)
+		return i;
+}
+
+3. Check if two binary trees are symmetric:-
+
+bool issymmetric(Node *root1,Node *root2)
+{
+	if(!root1 && !root2)
+		return false;
+
+	if(root1 && root2 && root1->data==root2->data)
+		return (issymmetric(root1->left,root2->right) &&
+				   issymmetric(root1->right,root2->left));
+}
+
+4. Flatten a binary tree:-
+
+void flatten(Node *root)
+{
+	if(node == NULL) || (!node->left && !node->right)
+		return false;
+
+	if(node->left)
+	{
+		flatten(node->left);
+		Node *storeright=node->right;
+		node->right=node->left;
+		node->left=NULL;
+	
+	Node *t=root->right;
+	while(t->right)
+	{
+		t=t->right;
+	}
+	t->right=storeright;
+	}
+	flatten(root->right);
+}		

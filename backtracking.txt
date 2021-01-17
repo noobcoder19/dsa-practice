@@ -1,0 +1,367 @@
+1. Find the subsets of vector:-
+
+void subset(vector<vector<int>> &res,vector<int> &subres,vector<int> &A,int idx)
+{
+	res.push_back(subres);
+
+	for(int i=idx;i<=A.size();i++)
+	{
+		subres.push_back(A[i]);
+		subset(res,subres,A,idx+1);
+		subres.pop_back();
+	}
+}	return;
+	
+vector<vector<int>> solution(vector<int> A)
+{
+	vector<vector<int>> res;
+	vector<int> subres;
+	sort(A.begin(),A.end();
+	subset(res,subres,A,0);
+	return res;
+}
+
+2.find subsets which might contain duplicates:-
+void checkAndPush(vector<vector<int> >&ans,vector<int> temp){
+        for(int i=0; i<ans.size(); i++){
+            if(ans[i]==temp)
+            return;
+        }
+        ans.push_back(temp);
+    return;
+    }
+    void findSubsets(vector<int> &A,vector<vector<int> >&ans,vector<int> &temp,int i){
+        checkAndPush(ans,temp);
+        for(int j=i; j<A.size(); j++){
+            temp.push_back(A[j]);
+            findSubsets(A,ans,temp,j+1);
+            temp.pop_back();
+        }
+        return;
+    }
+
+    vector<vector<int> > Solution::subsetsWithDup(vector<int> &A) {
+        sort(A.begin(),A.end());
+        vector<vector<int> > ans;
+        vector<int> temp;
+        findSubsets(A,ans,temp,0);
+        return ans;
+    }
+
+
+
+3. combination sum where an element is used multiple times:-
+
+void subsetsum(vector<int> &A,int B,int indx,vector<vector<int>> &res, vector<int> &v)
+{
+    if(B<0)
+        return;
+        
+    if(B==0)
+        {res.push_back(v);
+         return;
+        }
+    for(int i=indx;i<A.size();i++){
+        if(i==0 || (i>0 && A[i-1]!=A[i])){
+            v.push_back(A[i]);
+            subsetsum(A,B-A[i],i,res,v);
+            v.pop_back();
+        }
+    }    
+}
+vector<vector<int> > Solution::combinationSum(vector<int> &A, int B) {
+    vector<int> v;
+    vector<vector<int>> res;
+    sort(A.begin(),A.end());
+    
+    subsetsum(A,B,0,res,v);
+    return res;
+}
+
+
+4.Combination sum where an element is used only once:-
+void subsetsum(vector<int> &A,int B,int indx,vector<vector<int>> &res, vector<int> &v)
+{
+    if(B<0)
+        return;
+        
+    if(B==0)
+        {res.push_back(v);
+         return;
+        }
+    for(int i=indx;i<A.size();i++){
+        if(i==0 || (i>0 && A[i-1]!=A[i])){
+            v.push_back(A[i]);
+            subsetsum(A,B-A[i],i+1,res,v);
+            v.pop_back();
+        }
+    }    
+}
+vector<vector<int> > Solution::combinationSum(vector<int> &A, int B) {
+    vector<int> v;
+    vector<vector<int>> res;
+    sort(A.begin(),A.end());
+    
+    subsetsum(A,B,0,res,v);
+    return res;
+}
+
+
+ void subsetsum(vector<int> &A,int B,int indx,vector<vector<int>> &res, vector<int> &v)
+{
+    if(B<0)
+        return;
+        
+    if(B==0)
+        {res.push_back(v);
+         return;
+        }
+    for(int i=indx;i<A.size();i++){
+        if(i==0 || (i>0 && A[i-1]!=A[i])){
+            v.push_back(A[i]);
+            subsetsum(A,B-A[i],i,res,v);
+            v.pop_back();
+        }
+    }    
+}
+vector<vector<int> > Solution::combinationSum(vector<int> &A, int B) {
+    vector<int> v;
+    vector<vector<int>> res;
+    sort(A.begin(),A.end());
+    
+    subsetsum(A,B,0,res,v);
+    return res;
+}
+
+3. M coloring problem:-
+
+bool graph[V][V];
+int color[v]={0};
+
+
+bool issafe(bool graph[V][V],int color[V])
+{
+	for(int i=0;i<V;i++)
+	{
+	for(int j=i+1;j<V;j++)
+	{
+		if(graph[i][j] && color[i]==color[j])
+			return false;
+	}
+	return true;
+}
+bool graphcoloring(bool graph[V][V],int color[V],int V,int idx)
+{
+	if(idx==V)
+	{
+		if(issafe(graph,color){
+		print(color);
+		return true;
+		}
+		return false;
+	}
+	for(int j=1;j<=m;j++)
+	{
+		color[i]=j;
+
+		if(graphcoloring(graph,color,V,idx+1))
+			return true;
+
+		color[i]=0;
+	}
+	return false;
+}
+
+
+2. N queens_problem:-
+
+bool board[N][N];
+
+bool issafe(int row,int col)
+{
+	for(int i=0;i<col;i++)
+	{
+		if(board[row][i])
+			return false;
+	}
+	for(int i=row,j=col;i>=0 && j>=0;i--,j--)
+	{
+		if(board[i][j])
+			return false;
+	}
+	for(int i=row,j=col;i<N && j>=0;i++,j--_
+	{
+		if(board[i][j])
+			return false;
+	}
+	return true;
+}
+bool nqueens(int col)
+{
+	if(col==N)
+		return true;
+
+	for(int i=0;i<N;i++)
+	{
+		if(isSafe(i,col))
+		{
+			board[i][col]=1;
+			if(nqueens(col+1))
+				return true;
+			board[i][col]=0;
+		}
+	}
+	return false;
+}
+
+3. SUDOKU:-
+int grid[N][N];
+
+boolean solve()
+{
+	int i,j;
+	for(i=0;i<N;i++)
+		for(j=0;j<N;j++)
+			if(grid[i][j]==0)
+				break;
+	if(i==N && j==N)
+		return true;
+
+	for(int num=1;num<=9;num++)
+	{
+		if(issafe(i,j,num)
+		{
+			grid[i][j]=num;
+			if(solve())
+				return;
+			grid[i][j]=0;
+		}
+	}
+	return false;
+}
+boolean issafe(int i,int j,int num)
+{
+	for(int k=0;k<N;k++)
+	{
+		if(grid[k][j]==num || grid[i][k]==num)
+			return false;
+	}
+		int s=sqrt(N);
+		int boxstartx=i-i%s;
+		int boxstarty=j-j%s;
+		for(int i=0;i<s;i++)
+		{
+			for(int j=0;j<s;j++)
+			{
+			if(grid[i+boxstartx][j+boxstarty]==num)
+				return false;
+			}
+		return true; 
+}
+	
+4. rat in a maze:-
+
+int sol[N][N],maze[N][N];
+bool issafe(int i,int j)
+{
+	return i<N && j<N && maze[i][j];
+}
+bool solvemaze(int i,int j)
+{
+	if(i==N-1 && j==N-1)
+	{
+		sol[i][j]=1;
+		return;
+	}
+	if(isSafe(i,j)
+	{
+		sol[i][j]=1;
+		if(solvemaze(i+1,j)
+			return true;
+		else if(solvemaze(i,j+1)
+			return true;
+		sol[i][j]=0;
+	}
+	return false;
+}
+5. print all permutations of a string:-
+	void permutations(int l,int r)
+	{
+		if(l==r){
+			cout<<s;
+			return true;
+			}
+		for(int i=l;i<=r;i++)
+		{
+			swap(s[l],s[i]);
+			permutations(l+1,r);
+			swap(s[l],s[i]);
+		}
+	}
+1. PAlindrome partitioning:-
+
+bool isPalindromme(string s)
+{
+	for(int i=0;i<s.length()/2;i++)
+		if(s[i]!=s[s.length()-i-1])
+			return false;
+
+	return true;
+}
+void partitioning(int index,vector<string> str,vector<vector<string>> &solution,string A)
+{
+		if(index==A.length())
+		{
+			solution.push_back(str);
+			return;
+		}
+		else
+		{
+		string s="";
+			for(int i=index;i<A.length();i++)
+			{
+				s+=A[i];
+				if(ispalindrome(s))
+				{
+				str.push_back(s);
+				partitioning(index+1,str,solution,A);
+				str.pop_back();
+				}
+			}
+		}
+}
+vector<vector<string>> partition(string A)
+{
+	vector<vector<string>> solution;
+	vector<string> str;
+	partitioning(0,str,solution,A);
+	return solution;
+}
+
+2.Letter phone:-
+Solution
+
+void findletter(vector<string> &ans,string &s,int index,string &digits)
+{
+	if(index==digit.length()){
+		ans.push_back(s);
+		return;
+	}
+	int digit=digits[index]-'0';
+	for(int i=0;i<map[digit].length();i++)
+	{
+		s.push_back(map[digit][i]);
+		findletter(ans,s,index+1,digits);
+		s.pop_back();
+	}
+
+}
+
+	
+vector<string> solution(string digit)
+{
+	vector<string> ans;
+	string s=";
+	findletter(ans,s,0,digit);
+	return ans;
+}

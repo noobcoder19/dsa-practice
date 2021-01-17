@@ -1,0 +1,289 @@
+1. Josephus problem
+
+int solve(vector<int> arr,int k,int &ans)
+{
+	if(arr.size()==1)
+	{ans= arr[0];
+	return;
+}
+
+	int index=(index+k)%v.size();
+	v.erase(arr.begin()+index);
+	
+	solve(arr,k,ans);
+}
+
+2. 	
+sort an array using recursion:--
+
+void solve(vector<int> &v,int n)
+{
+	if(n==1)
+	return;
+
+	int temp=v[n-1];
+	v.pop_back();
+	sort(v);
+
+	insert(v,temp);
+}
+void insert(vector<int> &v,int temp)
+{
+
+	if(v.size()==0 || v[v.size()-1]<=temp)
+		v.push_back(temp);
+
+
+	int val=v[v.size()-1];
+	v.pop_back();
+
+	insert(v,temp);
+
+	v.push_back(val);
+}
+
+3. delete middle element of stack in O(1):-
+
+void delete(stack<int> &s,int mid)
+{
+	is(k==1)
+	{s.pop();
+	return;}
+
+
+	int temp=s.top();
+	s.pop();
+	delete(s,mid-1);
+
+	s.push(temp);
+	return;
+}
+
+4.reverse a stack in O(1):-
+
+void reverse(stack<int> &s)
+{
+	if(s.size()==1)
+		return;
+
+	int temp=s.top();
+	s.pop();
+	reverse(s);
+
+	insert(s,temp);
+
+}
+
+void insert(stack<int> &s,int temp)
+{
+	if(s.size()==0)
+		s.push(temp);
+
+	int val=s.top();
+	s.pop();
+	insert(s,temp);
+
+	s.push(val);
+}
+
+5. kth symbol in a grammar:-
+void solve(int n,int k)
+{
+	if(n==1 && k==1)
+		return 0;
+
+	int mid=pow(2,N-1)/2;
+	if(k<=mid)
+		return solve(n-1,k);
+	else
+		return !solve(n-1,k-mid);
+}
+6. tower of hanoi:-
+
+void move(int s,int d,int h,int n)
+{
+	if(n==1)
+	cout<<"moving "<<n<<" from "<<s<<"to "<<d;
+
+	move(s,h,d,n-1);
+	cout<<"moving "<<n<<" from "<<s<<"to "<<d;
+	move(h,d,s,n-1);
+
+}
+
+7. Print all subsets:-
+
+ main()
+{
+	string ip;
+	cin>>ip;
+
+	string op="";
+	solve(ip,op);
+}
+
+void solve(string ip,string op)
+{
+	if(ip.length()==0)
+	{
+		cout<<op<<" ";
+		return;
+	}
+	string op1=op;
+	string op2=op;
+	op2.push_back(ip[0]);
+	ip.erase(ip.begin()+0);
+	solve(ip,op1);
+	solve(ip,op2);
+	return;
+}
+	
+
+8 permutation with spaces:-
+
+ main()
+{
+	string ip;
+	cin>>ip;
+
+	string op="";
+	op.push_back(ip[0]);
+	ip.erase(ip.begin()+0);
+	solve(ip,op);
+}
+
+void solve(string ip,string op)
+{
+	if(ip.length()==0)
+	{
+		cout<<op<<" ";
+		return;
+	}
+	string op1=op;
+	string op2=op;
+	op1.push_back("_");
+	op1.push_back(ip[0];
+	op2.push_back(ip[0]);
+	ip.erase(ip.begin()+0);
+	solve(ip,op1);
+	solve(ip,op2);
+	return;
+}
+
+9. permutation with case change:-
+
+ main()
+{
+	string ip;
+	cin>>ip;
+
+	string op="";
+	solve(ip,op);
+}
+
+void solve(string ip,string op)
+{
+	if(ip.length()==0)
+	{
+		cout<<op<<" ";
+		return;
+	}
+	string op1=op;
+	string op2=op;
+	op1.push_back(ip[0]);
+	op2.push_back(toupper(ip[0]));
+	ip.erase(ip.begin()+0);
+	solve(ip,op1);
+	solve(ip,op2);
+	return;
+}
+
+10. Letter case permutation:-
+
+string<int> solve(string ip,string op,vector<string> &s)
+{
+	if(ip.length()==0)
+	{
+		s.push_back(op);
+		return s;
+	}
+	if(isalpha(ip[0])
+	{
+		string op1=op;
+		string op2=op;
+		op1.push_back(tolower(ip[0]);
+		op2.push_back(toupper(ip[0]);
+		ip.erase(ip.begin()+0);
+		solve(ip,op1,s);
+		solve(ip,op2,s);
+	}
+	else
+	{
+		string op1=op;
+		op1.push_back(ip[0]);
+		ip.erase(ip.begin()+0);
+		solve(ip,op1,s);
+	}
+}
+
+11. generate balanced paranthesis:-
+
+vector<string> balanced(int n)
+{
+	int input=n;
+	int output=n;
+	string op="";
+	solve(input,output,op,v);
+}
+
+void solve(int open,int closed,string op,vector<int> &v)
+{
+	if(open==0 && closed==0)
+	{
+		v.push_back(op);
+		return;
+	}
+	if(open!=0)
+	{
+		string op1=op;
+		op1.push_back('(');
+		solve(open-1,closed,op,v);
+	}
+	if(closed>open)
+	{
+		string op2=op;
+		op2.push_back(')');
+		solve(open,closed-1,op,v);
+	}
+	return;
+}
+
+12. print N bit primary nos having more 1's than 0's:-
+
+int main()
+{
+	int n;
+	cin>>n;
+	int ones=0;
+	int twos=0;
+	string op="";
+	solve(op,ones,zeroes,n);
+}
+int solve(string op,int ones,int zeroes,int n)
+{
+	if(n==0)
+	{
+		cout<<op;
+		return;
+	}
+	string op1=op;
+	op1.push_back('1');
+	solve(op1,ones+1,zeroes,n-1);
+	if(ones>zeroes)
+	{
+		string op2=op;
+		op2.push_back('0');
+		solve(op2,ones,zeroes+1,n-1);
+	}
+	return;
+}

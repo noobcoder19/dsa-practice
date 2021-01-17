@@ -1,0 +1,140 @@
+1. Find the duplicate element in array in a list of N integers.
+
+void duplicate(int arr[],int n)
+{
+	for(int i=0;i<arr.size();i++)
+	{
+		if(arr[abs(arr[i])]>=0)
+			arr[abs(arr[i])=-arr[abs(arr[i])];
+		
+		else
+			cout<<abs(arr[i]);
+	}
+}
+
+2. Sort an array of 0's,1's and 2's without using extra space.
+
+void sort(int arr[],int n)
+{
+	int low=0;
+	int high=n-1;
+	int mid=(low+high)/2;
+
+	switch(arr[mid])	
+	{
+		case 0:
+			swap(arr[low++],arr[mid++]);
+			break;
+
+		case 1:
+			mid++;
+			break;
+
+		case 2:
+			swap(arr[mid],arr[high--];
+			break;
+	}
+}
+
+3. repeat and missing no:
+
+void duplicate(int arr[],int n)
+{
+	for(int i=0;i<arr.size();i++)
+	{
+		if(arr[abs(arr[i])]>=0)
+			arr[abs(arr[i])=-arr[abs(arr[i])];
+		
+		else
+			cout<<abs(arr[i]);
+	}
+	for(int i=0;i<arr.size();i++)
+	if(arr[i]>0)
+		cout<<i+1;
+}
+
+4. merge two sorted arrays without extra space.
+
+void sorted(int arr1[],int arr2[],int m,int n)
+{
+	for(int i=n-1;i>=0;i--)
+	{
+		int last=arr1[m-1],j;
+		for(j=m-2;j>=0 && arr1[j] > arr2[i];j--)
+			arr1[j+1]=arr1[j];
+
+		if (j != m-2 || last > ar2[i]) 
+        	{ 
+            		ar1[j+1] = ar2[i]; 
+            		ar2[i] = last; 
+        	} 
+    	} 
+} 
+
+5. kadane's algo:-
+
+void longestincreasingsubsequence(int arr[],int n)
+{
+	int max_so_far=max_ending_here=INT_MIN;
+	for(int i=0;i<n;i++)
+	{
+		maxendinghere+=arr[i];
+		maxsofar=max(maxsofar,maxendinghere);
+		if(max_ending_here<0)
+			max_ending_here=0;
+
+	}
+}
+
+6.merge overlapping subintervals:-
+
+struct Interval{
+	int start,end;
+}
+
+bool compare(Interval a,Interval b)
+{
+	return a.start<b.start;
+}
+void mergeintervals(Interval arr[],int n)
+{
+	sort(arr,arr+n,compare);
+	int index=0;
+
+	for(int i=1;i<n;i++)
+	{
+
+		if(arr[index].end >= arr[i].start)
+		{
+			arr[index].end=max(arr[i].end,arr[index].end);
+			arr[index].start=min(arr[i].start,arr[index].start);
+		}
+		else
+		{
+			arr[index]=arr[i];
+			index++;
+		}
+	}
+}
+
+
+set<int> us;
+while(n!=1)
+{
+	int temp=n;
+	int sum=0;
+	while(temp>0)
+	{
+		int digit=temp%10;
+		sum+=digit*digit;
+		temp/=10;
+	}
+	n=sum;
+	if(us.find(n)!=us.end()
+		return false;
+	else
+		us.insert(n);
+	}
+return true;
+}
+

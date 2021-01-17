@@ -1,0 +1,256 @@
+1. fill rows and columns by 0:
+
+void fill(vector<int> &A,int n)
+{
+	unordered<set> rows;
+	unordered<set> column;
+	for(int i=0;i<A.size();i++)
+	{
+		for(int j=0;j<A[0].size();i++)
+		{
+			if(A[i][j]!=0)
+				continue;
+
+			rows.insert(i);
+			columns.insert(j);
+		}
+	}
+	
+	 for (auto it = rows.begin(); it != rows.end(); ++it) {
+            int i = *it;
+            
+            for (int j = 0; j < matrix[0].size(); ++j) {
+                matrix[i][j] = 0;
+            }
+        }
+        
+        for (auto it = cols.begin(); it != cols.end(); ++it) {
+            int j = *it;
+            
+            for (int i = 0; i < matrix.size(); ++i) {
+                matrix[i][j] = 0;
+            }
+        }
+}
+
+
+2. PASCAL'S Triangle:-
+
+
+void pascal(int n)
+{
+	int arr[n][n];
+	for(int line=0;line<n;line++)
+	{
+		for(int j=0;j<=line;j++)
+		{
+			if(j==line || j==0)
+			arr[line][j]=1;
+			else
+			arr[line][i]=arr[line-1][i-1]+arr[line-1][i];
+		}
+	}
+}
+
+void pascal(int n)
+{
+	for(int i=1;i<=n;i++)
+	{int C=1;
+		for(int j=1;j<=i;j++)
+		{
+			cout<<C<<" ";
+			C=C*(i-j)/j;
+		}
+		cout<<"\n";
+	}
+}
+
+3. Next permutation of string:-
+void swap(char* a, char* b) 
+{ 
+    if (*a == *b) 
+        return; 
+    *a ^= *b; 
+    *b ^= *a; 
+    *a ^= *b; 
+} 
+void rev(string& s, int l, int r) 
+{ 
+    while (l < r) 
+        swap(&s[l++], &s[r--]); 
+} 
+  
+int bsearch(string &s,int low,int high,int x)
+{
+	int index=-1;
+	while(low<=high)
+	{
+		int mid=low+(high-low)/2;
+		if(s[mid]<=key)
+			high=mid-1;
+
+		else
+		{
+			low=mid+1;
+			if(index==-1 && s[index]>=s[mid])
+				index=md;
+		}
+	return index;
+}
+bool nextpermutation(string &s)
+{
+	int len=s.length();
+	int i=n-2;
+	while(s[i]>=s[i+1] && i>=0)
+	i--;
+	
+	if(i<0) 
+		return false;
+
+	else
+		{
+		int index=bsearch(s,i+1,len-1,s[i]);
+		swap(&s[i],&s[index]);
+		rev(s,i+1,len-1);
+		return true;
+		}
+	}
+4:-  next permutation of numbers::-
+void findnext(int arr[],int n)
+{
+	int i,j;
+	for(int i=n-1;i>=0;i--)
+	{
+		if(arr[i]>arr[i-1])
+		break;
+	}
+	int smmallest=i;
+	int x=arr[i-1];
+	for(int j=i+1;j<n;j++)0
+	{
+		if(arr[j]>x && arr[j]<arr[smallest])
+			smallest=j;
+	}
+	swap(&number[smallest], &number[i-1]); 
+    	sort(number + i, number + n); 
+}		
+
+5:- find the number of inversions in an array:-
+void findinversions(int arr[],int n)
+{
+	int temp[n];
+	mergesort(arr[],temp[],0,n-1);
+}	
+
+int mergesort(int arr[],int temp[],int low,int high)
+{
+	int mid,inv_count=0;
+	if(low<high)
+	{
+		int mid=(low+high)/2;
+		inv_count+=mergesort(arr,temp,0,mid);
+		inv_count+=mergesort(arr,temp,mid+1,high);
+		        inv_count += merge(arr, temp, left, mid + 1, right); 
+	return inv_count;
+}
+
+int merge(int arr[],int temp[],int low,int mid,int high)
+{
+	int i=low;
+	int j=high;
+	int k=low;
+	int inv_count=0;
+	while((i<=mid-1) && (j<=end))
+	{
+		if(arr[i]<=arr[j])
+		temp[k++]=arr[i++];
+
+		else
+		{
+			temp[k++]=arr[j++];
+			inv_count+=(mid-i);
+		}
+	}
+	 while (i <= mid - 1) 
+        temp[k++] = arr[i++]; 
+  
+    
+    while (j <= right) 
+        temp[k++] = arr[j++]; 
+  
+    
+    for (i = left; i <= right; i++) 
+        arr[i] = temp[i]; 
+  
+    return inv_count; 
+}
+
+6.   Stock span:-
+
+void stockspan(int arr[],int n)
+{
+	stack<int> s;
+	s.push(0);
+	for(int i=1;i<n;i++)
+	{
+	while(!s.empty() && arr[s.top()]<=arr[i])
+		s.pop();
+
+	int span=s.empty()?(i+1):i-s.top();
+	s.push(i);
+	}
+}
+
+7. rotate a matrix clockwise:-
+	
+void rotate(int m,int n,int arr[m][n])
+{
+	int prev,curr;
+	int row=0,col=0;
+
+	while(row<=m && col<=n)
+	{
+	if(row+1==m && col+1==n)
+	break;
+
+		prev=arr[row+1][col];
+		for(int i=col;i<n;i++)
+		{
+			curr=arr[row][i];
+			arr[row][i]=prev;
+			prev=curr;
+		}
+		row++;
+		
+		for(int i=row;i<m;i++)
+		{
+			curr=arr[i][n-1];
+			arr[i][n-1]=prev;
+			prev=curr;
+		}
+		n--;
+		if(row<m)
+		{
+		for(int i=n-1;i>=0;i--)
+		{
+			curr=arr[m-1][i];
+			arr[i][m-1]=prev;
+			prev=curr;
+		}
+}
+		m--
+		if(col<n)
+		{
+		for(int i=m-1;i>=0;i--)
+		{
+			curr=arr[i][col];
+			arr[i][col]=prev;
+			prev=curr;
+		}
+		}
+		col++;
+	}
+
+
+
+		
